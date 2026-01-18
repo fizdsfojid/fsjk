@@ -27,7 +27,7 @@ public class Workers {
     private String email;
 
     @Column(name = "password")
-    private Integer password;
+    private String password;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,7 +35,7 @@ public class Workers {
     @ToString.Exclude
     private Boss boss;
 
-    public Workers(String email, String lastName, String firstName, Integer password) {
+    public Workers(String email, String lastName, String firstName, String password) {
         this.email = email;
         this.lastName = lastName;
         this.firstName = firstName;

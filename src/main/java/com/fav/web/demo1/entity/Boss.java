@@ -31,9 +31,9 @@ public class Boss {
     private String email;
 
     @Column(name = "password")
-    private Integer password;
+    private String password;
 
-    public Boss(String firstName, String lastName, String email, Integer password) {
+    public Boss(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
