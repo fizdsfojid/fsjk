@@ -14,32 +14,30 @@ import org.springframework.stereotype.Component;
 public class InputHandler implements CommandLineRunner {
 
     private final WorkerDAO workerDAO;
-    private final PasswordEncoder passwordEncoder;
     private final BossDAO bossDAO;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
+        // 1. Create Encrypted Passwords (MUST BE STRINGS)
         String workerPass = passwordEncoder.encode("321");
         String bossPass = passwordEncoder.encode("123");
 
-        // 2. Create Workers
-        Workers Ivan = new Workers("IvanEmail", "Shemshur", "Ivan", workerPass);
-        Workers Dima = new Workers("DimaEmail", "Lahovych", "Dima", workerPass);
-        Workers Stas = new Workers("StasEmail", "Petrenko", "Stas", workerPass);
+        // 2. Pass the String password to the constructor
+        Workers ivan = new Workers("IvanEmail", "Shemshur", "Ivan", workerPass);
+        Workers dima = new Workers("DimaEmail", "Lahovych", "Dima", workerPass);
+        Workers stas = new Workers("StasEmail", "Petrenko", "Stas", workerPass);
 
-        workerDAO.save(Ivan);
-        workerDAO.save(Dima);
-        workerDAO.save(Stas);
+        workerDAO.save(ivan);
+        workerDAO.save(dima);
+        workerDAO.save(stas);
 
-        // 3. Create Bosses
-        Boss Ania = new Boss("Ania", "Bochkai", "AnianEmail", bossPass);
-        Boss Kiril = new Boss("Kiril", "ornets", "KirilEmail", bossPass);
+        Boss ania = new Boss("Ania", "Bochkai", "AnianEmail", bossPass);
+        bossDAO.save(ania);
 
-        Ania.addWorker(Ivan);
-        Kiril.addWorker(Dima);
-        Kiril.addWorker(Stas);
+        ania.addWorker(ivan);
+        bossDAO.save(ania);
 
-        bossDAO.save(Ania);
-        bossDAO.save(Kiril);
+        System.out.println("Data Saved Successfully!");
     }
 }
